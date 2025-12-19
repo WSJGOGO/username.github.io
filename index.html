@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>王驷洁 - 个人主页</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 全局样式重置和变量定义 */
+        :root {
+            --primary-color: #4F46E5; /* 主色调 - 蓝色 */
+            --primary-dark: #4338CA;
+            --primary-light: #818CF8;
+            --text-dark: #1F2937;
+            --text-light: #6B7280;
+            --bg-light: #F9FAFB;
+            --bg-white: #FFFFFF;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s ease;
+            --border-radius: 8px;
+            --max-width: 1200px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth; /* 启用平滑滚动 */
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            overflow-x: hidden;
+        }
+
+        /* 容器样式 */
+        .container {
+            width: 100%;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* 导航栏样式 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--bg-white);
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            cursor: pointer;
+        }
+
+        /* Hero区域样式 */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 4rem;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            max-width: 600px;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.875rem 1.75rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(79, 70, 229, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* 通用部分样式 */
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--text-dark);
+        }
+
+        .section-title span {
+            color: var(--primary-color);
+        }
+
+        /* 关于我部分样式 */
+        .about {
+            background-color: var(--bg-white);
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text p {
+            font-size: 1.125rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+        }
+
+        .avatar {
+            flex: 0 0 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary-dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .avatar-placeholder {
+            font-size: 5rem;
+            color: white;
+        }
+
+        /* 技能部分样式 */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background-color: var(--bg-white);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .skill-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .skill-desc {
+            color: var(--text-light);
+        }
+
+        /* 联系方式部分样式 */
+        .contact {
+            background-color: var(--bg-white);
+        }
+
+        .contact-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-text {
+            font-size: 1.125rem;
+            margin-bottom: 3rem;
+            color: var(--text-light);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-dark);
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+
+        .social-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .social-name {
+            font-weight: 500;
+        }
+
+        /* 页脚样式 */
+        .footer {
+            background-color: var(--text-dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .footer-text {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* 微信二维码弹窗样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: var(--bg-white);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s ease;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: var(--transition);
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .modal-close:hover {
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        .qr-code {
+            width: 250px;
+            height: 250px;
+            margin: 0 auto 1.5rem;
+            background-color: var(--bg-light);
+            border: 2px solid var(--primary-light);
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .qr-code img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .qr-placeholder {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .modal-text {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .about-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .avatar {
+                flex: 0 0 200px;
+                height: 200px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: var(--bg-white);
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 0;
+                box-shadow: var(--shadow);
+                transform: translateY(-100%);
+                opacity: 0;
+                transition: var(--transition);
+                z-index: 999;
+            }
+            
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.25rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .social-links {
+                gap: 1.5rem;
+            }
+            
+            .social-icon {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#home" class="logo">王驷洁</a>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about" class="nav-link">关于我</a></li>
+                <li><a href="#skills" class="nav-link">技能</a></li>
+                <li><a href="#contact" class="nav-link">联系方式</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero区域 -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">你好，我是<span style="color: var(--primary-color);"> 王驷洁</span></h1>
+                <p class="hero-subtitle">一名热爱学习的 AI Coding 学员</p>
+                <div class="hero-buttons">
+                    <a href="#skills" class="btn btn-primary">查看作品</a>
+                    <a href="#contact" class="btn btn-secondary">联系我</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于我部分 -->
+    <section id="about" class="section about">
+        <div class="container">
+            <h2 class="section-title">关于<span> 我</span></h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>你好！我是王驷洁，一名对技术和创新充满热情的AI Coding学员。我目前专注于学习人工智能和Web开发技术，希望通过技术解决实际问题。</p>
+                    <p>我拥有计算机科学背景，对前端开发、机器学习和数据可视化等领域有浓厚兴趣。我相信技术的力量可以改变世界，让生活变得更加美好。</p>
+                    <p>在我的学习过程中，我不断探索新技术，并将所学应用于实际项目中。我喜欢挑战自我，乐于学习新知识，并享受将创意转化为现实的过程。</p>
+                    <p>除了编程，我还喜欢阅读科技博客、参加技术社区活动，并与志同道合的人交流想法和经验。</p>
+                </div>
+                <div class="avatar">
+                    <div class="avatar-placeholder">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 技能展示部分 -->
+    <section id="skills" class="section">
+        <div class="container">
+            <h2 class="section-title">我的<span> 技能</span></h2>
+            <div class="skills-grid">
+                <!-- 技能卡片1 -->
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fab fa-html5"></i>
+                    </div>
+                    <h3 class="skill-title">HTML/CSS</h3>
+                    <p class="skill-desc">熟练掌握语义化HTML和现代CSS技术，能够创建响应式、跨浏览器的网页布局。</p>
+                </div>
+                
+                <!-- 技能卡片2 -->
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fab fa-js-square"></i>
+                    </div>
+                    <h3 class="skill-title">JavaScript</h3>
+                    <p class="skill-desc">掌握ES6+特性，能够开发交互丰富的Web应用，理解异步编程和DOM操作。</p>
+                </div>
+                
+                <!-- 技能卡片3 -->
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fab fa-react"></i>
+                    </div>
+                    <h3 class="skill-title">React</h3>
+                    <p class="skill-desc">熟悉React生态，能够使用Hooks和状态管理工具构建高效的单页应用。</p>
+                </div>
+                
+                <!-- 技能卡片4 -->
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3 class="skill-title">数据库</h3>
+                    <p class="skill-desc">了解SQL和NoSQL数据库，能够设计数据模型并执行基本的数据库操作。</p>
+                </div>
+                
+                <!-- 技能卡片5 -->
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 class="skill-title">AI/ML基础</h3>
+                    <p class="skill-desc">了解机器学习基本概念，能够使用Python和相关库进行数据分析与模型训练。</p>
+                </div>
+                
+                <!-- 技能卡片6 -->
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="skill-title">响应式设计</h3>
+                    <p class="skill-desc">精通移动优先设计原则，能够创建适应各种设备的优秀用户体验。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系方式部分 -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <h2 class="section-title">联系<span> 我</span></h2>
+            <div class="contact-content">
+                <p class="contact-text">如果你对我的工作感兴趣，或者想讨论合作机会，请随时通过以下方式联系我。我期待与你交流！</p>
+                
+                <div class="social-links">
+                    <!-- 邮箱 -->
+                    <a href="mailto:865873947@qq.com" class="social-link">
+                        <div class="social-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="social-name">邮箱</div>
+                    </a>
+                    
+                    <!-- GitHub -->
+                    <a href="https://github.com" target="_blank" class="social-link">
+                        <div class="social-icon">
+                            <i class="fab fa-github"></i>
+                        </div>
+                        <div class="social-name">GitHub</div>
+                    </a>
+                    
+                    <!-- 微信 -->
+                    <a href="javascript:void(0);" class="social-link" id="wechatLink">
+                        <div class="social-icon">
+                            <i class="fab fa-weixin"></i>
+                        </div>
+                        <div class="social-name">微信</div>
+                    </a>
+                    
+                    <!-- LinkedIn -->
+                    <a href="https://linkedin.com" target="_blank" class="social-link">
+                        <div class="social-icon">
+                            <i class="fab fa-linkedin"></i>
+                        </div>
+                        <div class="social-name">LinkedIn</div>
+                    </a>
+                    
+                    <!-- 个人博客 -->
+                    <a href="https://blog.example.com" target="_blank" class="social-link">
+                        <div class="social-icon">
+                            <i class="fas fa-blog"></i>
+                        </div>
+                        <div class="social-name">个人博客</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">© 2023 王驷洁. 保留所有权利.</p>
+            <p class="footer-text">本页面使用HTML5、CSS3和JavaScript构建</p>
+        </div>
+    </footer>
+
+    <!-- 微信二维码弹窗 -->
+    <div class="modal" id="wechatModal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeModal">
+                <i class="fas fa-times"></i>
+            </button>
+            <h3 class="modal-title">扫描二维码添加微信</h3>
+            <div class="qr-code">
+                <!-- 请将下面的图片路径替换为您的微信二维码图片 -->
+                <img src="wechat-qr.png" alt="微信二维码" onerror="this.parentElement.innerHTML='<div class=\'qr-placeholder\'>请将二维码图片放在项目根目录，命名为 wechat-qr.png</div>'">
+            </div>
+            <p class="modal-text">使用微信扫一扫添加我为好友</p>
+        </div>
+    </div>
+
+    <script>
+        // 等待DOM完全加载后执行
+        document.addEventListener('DOMContentLoaded', function() {
+            // 移动端菜单切换
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navLinks = document.getElementById('navLinks');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                // 切换菜单图标
+                const icon = mobileMenuBtn.querySelector('i');
+                if (navLinks.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+            
+            // 点击导航链接时关闭移动端菜单
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', function() {
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        const icon = mobileMenuBtn.querySelector('i');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                });
+            });
+            
+            // 导航栏滚动效果
+            window.addEventListener('scroll', function() {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 50) {
+                    navbar.style.padding = '0.5rem 0';
+                } else {
+                    navbar.style.padding = '1rem 0';
+                }
+            });
+            
+            // 技能卡片动画 - 滚动时显示
+            const skillCards = document.querySelectorAll('.skill-card');
+            
+            function checkScroll() {
+                const triggerBottom = window.innerHeight * 0.9;
+                
+                skillCards.forEach(card => {
+                    const cardTop = card.getBoundingClientRect().top;
+                    
+                    if (cardTop < triggerBottom) {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }
+                });
+            }
+            
+            // 初始设置技能卡片透明度
+            skillCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            });
+            
+            // 监听滚动事件
+            window.addEventListener('scroll', checkScroll);
+            // 初始检查
+            checkScroll();
+            
+            // 平滑滚动到锚点
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 70,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // 微信二维码弹窗功能
+            const wechatLink = document.getElementById('wechatLink');
+            const wechatModal = document.getElementById('wechatModal');
+            const closeModal = document.getElementById('closeModal');
+            
+            // 打开弹窗
+            wechatLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                wechatModal.classList.add('active');
+                document.body.style.overflow = 'hidden'; // 防止背景滚动
+            });
+            
+            // 关闭弹窗
+            closeModal.addEventListener('click', function() {
+                wechatModal.classList.remove('active');
+                document.body.style.overflow = ''; // 恢复滚动
+            });
+            
+            // 点击弹窗背景关闭
+            wechatModal.addEventListener('click', function(e) {
+                if (e.target === wechatModal) {
+                    wechatModal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+            
+            // ESC键关闭弹窗
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && wechatModal.classList.contains('active')) {
+                    wechatModal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
